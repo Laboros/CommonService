@@ -12,8 +12,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.commonservice.constants.CommonConstants;
+import com.commonservice.util.LoggerUtil;
 
 public class FileUtil {
+	
+	private static LoggerUtil logger=new LoggerUtil(FileUtil.class); 
 	
 	public static List<String> readLines(String fileNameWithLoc) throws IOException{
 		
@@ -121,9 +124,24 @@ public class FileUtil {
 		return onlyFileName.concat(extFile);
 	}
 
-	public static void moveFileToLoc(String fileNameWithLoc,String destinationLoc) throws IOException {
+	public static void moveFileToLoc(String fileNameWithLoc,String destinationLoc) throws IOException 
+	{
+		logger.debug("Moving files from :"+fileNameWithLoc+" destination location:"+destinationLoc);
+		
 		FileUtils.moveFileToDirectory(new File(fileNameWithLoc), new File(destinationLoc), Boolean.TRUE);
 		
+	}
+	/**
+	 * 
+	 * @param location
+	 * This method will cleanup in the local file system
+	 * @throws IOException 
+	 */
+	public static void cleanUp(final String location) throws IOException
+	{
+		logger.warn("Cleaning up location:"+location);
+		
+		FileUtils.cleanDirectory(new File(location));
 	}
 	
 }
