@@ -3,8 +3,6 @@ package com.commonservice;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -136,9 +134,14 @@ public class FileUtil {
 		if(!outputDir.exists())
 		{
 		FileUtils.forceMkdir(outputDir);
-		
 		}
-		Files.move(inputFile.toPath(), outputDir.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		for (File dirFile : outputDir.listFiles()) {
+			if(dirFile.getName().indexOf(fileNameWithLoc)!=-1){
+				dirFile.delete();
+			}
+			
+		}
+		FileUtils.moveFileToDirectory(inputFile, outputDir, Boolean.TRUE);
 		
 	}
 	/**
