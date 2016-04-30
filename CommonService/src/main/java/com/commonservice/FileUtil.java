@@ -99,6 +99,15 @@ public class FileUtil {
 		return onlyFileName;
 	}
 	
+	public static String getFileNameWithExt(final String fileNameWithExt)
+	{
+		String fileName=fileNameWithExt.substring(fileNameWithExt.lastIndexOf(CommonConstants.FILE_SEPARATOR.getValue())+1);
+		if(fileName==null){
+			fileName=fileNameWithExt;
+		}
+		return fileName;
+	}
+	
 	
 	public boolean moveToArchiveFile(final String inbox_loc,final String archive_loc, final String moveFileLookupName)
 	{
