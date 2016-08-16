@@ -1,5 +1,6 @@
 package com.commonservice.util;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,6 +17,13 @@ public class DateUtil {
 		return stringDate;
 	}
 	
+	
+	public static Timestamp convertTimeMillisIntoSqlTimeStamp(final long timeInMillies)
+	{
+		Timestamp timeStamp=new Timestamp(timeInMillies);
+		
+		return timeStamp;
+	}
 	public static void main(String[] args) {
 		
 		System.out.println(DateUtil.convertTimeIntoFormat(System.currentTimeMillis(), "yyyyMMdd HH:mm:ss"));
