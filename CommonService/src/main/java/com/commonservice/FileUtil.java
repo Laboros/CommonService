@@ -145,7 +145,7 @@ public class FileUtil {
 		FileUtils.forceMkdir(outputDir);
 		}
 		for (File dirFile : outputDir.listFiles()) {
-			if(dirFile.getName().indexOf(fileNameWithLoc)!=-1){
+			if(fileNameWithLoc.indexOf(dirFile.getName())!=-1){
 				dirFile.delete();
 			}
 			
@@ -165,5 +165,9 @@ public class FileUtil {
 		
 		FileUtils.cleanDirectory(new File(location));
 	}
-	
+
+	public static String getOnlyFileName(final String input){
+		String[] tokens=StringUtils.splitPreserveAllTokens(input, CommonConstants.FILE_SEPARATOR.getValue());
+		return tokens[tokens.length-1];
+	}
 }
